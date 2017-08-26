@@ -6,19 +6,22 @@ import Header from "./Header";
 export default class Layout extends React.Component {
   constructor() {
     super();
+    // Create state & set default title. Accessed via this.state.title
     this.state = {
       title: "Welcome",
     };
   }
+
+  // Function to change this.state.title
+  changeTitle(title) {
+    this.setState({title});
+  }
+
   render() {
-    setTimeout(() => {
-      this.setState({title: "Welcome Chris!"})
-    }, 2000);
-    
+    // Add changeTitle to Header element. Make sure to .bind(this) to use function in this component
     return (
       <div>
-        <Header title={this.state.title} />
-        <Header title="Other Title" />
+        <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
         <Footer/>
       </div>
     );
