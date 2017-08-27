@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Router, Route, IndexRoute, hashHistory } from "react-router";
 
-import Bootstrap from "./vendor/bootstrap-without-jquery";
+//import Bootstrap from "./vendor/bootstrap-without-jquery";
 
 import Archives from "./pages/Archives";
 import Featured from "./pages/Featured";
