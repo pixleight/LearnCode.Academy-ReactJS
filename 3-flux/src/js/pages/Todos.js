@@ -17,6 +17,7 @@ export default class Todos extends React.Component {
 
   // runs on init, good place to put event listeners
   componentWillMount() {
+    // Listen for the change emitter
     TodoStore.on("change", () => {
       this.setState({
         todos: TodoStore.getAll(),
@@ -24,8 +25,9 @@ export default class Todos extends React.Component {
     });
   }
 
-  createTodo() {
-    TodoActions.createTodo(Date.now());
+  reloadTodos() {
+    // Call the reloadTodos Action
+    TodoActions.reloadTodos();
   }
 
   render() {
@@ -38,7 +40,7 @@ export default class Todos extends React.Component {
     return (
       <div>
         <h1>Todos</h1>
-        <button onClick={this.createTodo.bind(this)}>Create</button>
+        <button onClick={this.reloadTodos.bind(this)}>Reload</button>
         <ul>{TodoComponents}</ul>
       </div>
     );

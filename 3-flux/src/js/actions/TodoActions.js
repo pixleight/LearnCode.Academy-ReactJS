@@ -15,3 +15,30 @@ export function deleteTodo(id) {
     id,
   });
 }
+
+export function reloadTodos() {
+// Normally, we'd load the data via ajax:
+//  axios("https://someurl.com/somedataendpoint").then((data) => {
+//    console.log("got the data!", data);
+//  });
+
+  // Dispatch a FETCH_TODOS action -- this could load a loading screen etc
+  dispatcher.dispatch({type: "FETCH_TODOS"});
+
+  // Faking the loading of data with a 1-second timeout:
+  setTimeout(() => {
+    // Dispatch the RECEIVE_TODOS with some data
+    dispatcher.dispatch({type: "RECEIVE_TODOS", todos: [
+      {
+        id: 1134646313,
+        text: "Go Shopping Again",
+        complete: false,
+      },
+      {
+        id: 2356846759,
+        text: "Hug Wife",
+        complete: true,
+      },
+    ]});
+  }, 1000);
+}
