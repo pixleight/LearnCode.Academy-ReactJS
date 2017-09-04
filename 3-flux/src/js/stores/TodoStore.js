@@ -35,5 +35,5 @@ class TodoStore extends EventEmitter {
 }
 
 const todoStore = new TodoStore;
-window.todoStore = todoStore;
+
 export default todoStore;
