@@ -1,5 +1,7 @@
 import { EventEmitter } from "events";
 
+// Store gets Actions from the Dispatcher and sends changes to the Component
+
 import dispatcher from "../dispatcher";
 
 class TodoStore extends EventEmitter {
