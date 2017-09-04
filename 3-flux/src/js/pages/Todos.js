@@ -10,6 +10,8 @@ import TodoStore from "../stores/TodoStore";
 export default class Todos extends React.Component {
   constructor() {
     super();
+    // Bind this to this.getTodos everywhere
+    this.getTodos = this.getTodos.bind(this);
     this.state = {
       todos: TodoStore.getAll(),
     };
@@ -18,10 +20,19 @@ export default class Todos extends React.Component {
   // runs on init, good place to put event listeners
   componentWillMount() {
     // Listen for the change emitter
-    TodoStore.on("change", () => {
-      this.setState({
-        todos: TodoStore.getAll(),
-      });
+    TodoStore.on("change", this.getTodos);
+  }
+
+  // Prevent memory leaks! This fires when the component unmounts; i.e., when the route changes
+  componentWillUnmount() {
+    // Remove any listener we created in the componentWillMount method
+    TodoStore.removeListener("change", this.getTodos);
+  }
+
+  // Breakingo out getTodos into its own method
+  getTodos() {
+    this.setState({
+      todos: TodoStore.getAll(),
     });
   }
 
